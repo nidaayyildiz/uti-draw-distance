@@ -1,15 +1,15 @@
-
 from sdks.novavision.src.helper.package import PackageHelper
-from components.Package.src.models.PackageModel import PackageModel, PackageConfigs, ConfigExecutor, PackageOutputs, PackageResponse, PackageExecutor, OutputImage
+from components.DrawDistance.src.models.PackageModel import (
+    PackageModel, PackageConfigs, ConfigExecutor,
+    OutputImage, DrawDistanceOutputs, DrawDistanceResponse, DrawDistanceExecutor,
+)
 
 
 def build_response(context):
-    outputImage = OutputImage(value=context.image)
-    Outputs = PackageOutputs(outputImage=outputImage)
-    packageResponse = PackageResponse(outputs=Outputs)
-    packageExecutor = PackageExecutor(value=packageResponse)
-    executor = ConfigExecutor(value=packageExecutor)
-    packageConfigs = PackageConfigs(executor=executor)
-    package = PackageHelper(packageModel=PackageModel, packageConfigs=packageConfigs)
-    packageModel = package.build_model(context)
-    return packageModel
+    output_image = OutputImage(value=context.image)
+    outputs = DrawDistanceOutputs(outputImage=output_image)
+    response = DrawDistanceResponse(outputs=outputs)
+    executor = ConfigExecutor(value=DrawDistanceExecutor(value=response))
+    package_configs = PackageConfigs(executor=executor)
+    package = PackageHelper(packageModel=PackageModel, packageConfigs=package_configs)
+    return package.build_model(context)
